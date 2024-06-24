@@ -27,7 +27,7 @@ jobs:
           pip install pandas numpy tensorflow  # Install necessary dependencies
 
       - name: Execute Python Script
-        run: python process_data.py  # Replace with your script name if different
+        run: python process_data.py  # Ensure this path is correct
 
       - name: Commit and Push Changes
         run: |
@@ -36,5 +36,4 @@ jobs:
           git add .
           git commit -m "Automated data processing"
           git push
-
 
