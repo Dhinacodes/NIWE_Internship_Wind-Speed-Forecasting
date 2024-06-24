@@ -8,6 +8,9 @@ on:
     branches:
       - main  # Trigger on pull requests to main branch
 
+permissions:
+  contents: write  # Grant write permissions to the workflow
+
 jobs:
   process-data:
     runs-on: ubuntu-latest
@@ -39,3 +42,4 @@ jobs:
           git add data/output
           git diff-index --quiet HEAD || git commit -m "Automated data processing"
           git push || echo "No changes to commit"
+
