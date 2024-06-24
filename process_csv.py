@@ -1,4 +1,4 @@
-import sys
+import os
 import pandas as pd
 import numpy as np
 from keras.models import load_model
@@ -37,7 +37,17 @@ def predict_missing_values(df, look_back):
     return df
 
 # Main function to process the CSV
-def main(input_csv, output_csv):
+def main():
+    input_csv = os.getenv('INPUT_CSV')
+    output_csv = os.getenv('OUTPUT_CSV')
+
+    print(f"INPUT_CSV: {input_csv}")
+    print(f"OUTPUT_CSV: {output_csv}")
+
+    if not input_csv or not output_csv:
+        print("Environment variables INPUT_CSV and OUTPUT_CSV must be set.")
+        return
+
     # Read the CSV file
     df = pd.read_csv(input_csv)
 
@@ -51,11 +61,5 @@ def main(input_csv, output_csv):
     df.to_csv(output_csv, index=False)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python process_csv.py <input_csv_path> <output_csv_path>")
-        sys.exit(1)
-    
-    input_csv = sys.argv[1]
-    output_csv = sys.argv[2]
-    
-    main(input_csv, output_csv)
+    main()
+
