@@ -26,9 +26,13 @@ jobs:
         pip install -r requirements.txt
 
     - name: Process CSV file
+      env:
+        INPUT_CSV: ${{ github.event.inputs.csv_file_path }}
+        OUTPUT_CSV: output/completed_data.csv
       run: |
         mkdir -p output
-        python process_csv.py "${{ github.event.inputs.csv_file_path }}" "output/completed_data.csv"
+        echo "Input CSV: $INPUT_CSV"
+        python process_csv.py
 
     - name: Commit and push changes
       run: |
