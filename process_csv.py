@@ -6,7 +6,7 @@ from keras.models import load_model
 # Load the pre-trained model
 model = load_model('model.h5')
 
-# Function to create sequences
+# Function to create sequences and predict missing values
 def predict_missing_values(df, look_back):
     features = [
         '80m Avg [m/s]', '50m Avg [m/s]', '20m Avg [m/s]', '10m Avg [m/s]',
@@ -39,7 +39,7 @@ def predict_missing_values(df, look_back):
 # Main function to process the CSV
 def main(input_csv, output_csv):
     # Read the CSV file
-    df = pd.read_csv(sample.csv)
+    df = pd.read_csv(input_csv)
 
     # Define look_back period
     look_back = 10
@@ -51,6 +51,7 @@ def main(input_csv, output_csv):
     df.to_csv(output_csv, index=False)
 
 if __name__ == "__main__":
-    input_csv = os.getenv('INPUT_CSV', 'input.csv')
+    # Define input and output CSV file names
+    input_csv = os.getenv('INPUT_CSV', 'sample.csv')
     output_csv = os.getenv('OUTPUT_CSV', 'completed_data.csv')
     main(input_csv, output_csv)
