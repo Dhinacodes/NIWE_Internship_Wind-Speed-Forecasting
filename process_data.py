@@ -38,9 +38,11 @@ def predict_missing_values(df, look_back):
 
 # Process all CSV files in input directory
 def process_csv_files(input_dir, output_dir):
+    print(f"Processing CSV files in {input_dir}")
     for filename in os.listdir(input_dir):
         if filename.endswith('.csv'):
             input_csv = os.path.join(input_dir, filename)
+            print(f"Reading {input_csv}")
             df = pd.read_csv(input_csv)
 
             # Define look_back period
@@ -53,7 +55,7 @@ def process_csv_files(input_dir, output_dir):
             output_csv = os.path.join(output_dir, 'completed_' + filename)
             df.to_csv(output_csv, index=False)
 
-            print(f'Processed: {input_csv} -> Output saved to: {output_csv}')
+            print(f"Processed {input_csv} -> Output saved to: {output_csv}")
 
 # Example usage
 if __name__ == '__main__':
@@ -61,6 +63,5 @@ if __name__ == '__main__':
     output_dir = 'data/output'
     os.makedirs(output_dir, exist_ok=True)
     process_csv_files(input_dir, output_dir)
-
 
 
