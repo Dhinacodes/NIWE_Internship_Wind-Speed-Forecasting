@@ -1,9 +1,11 @@
 name: Process CSV
 
 on:
-  push:
-    paths:
-      - '**/*.csv'
+  workflow_dispatch:
+    inputs:
+      csv_file_path:
+        description: 'Path to the CSV file'
+        required: true
 
 jobs:
   process-csv:
@@ -25,17 +27,9 @@ jobs:
 
     - name: Process CSV file
       env:
-        INPUT_CSV: ${{ github.event.head_commit.files[0].filename }}
+        INPUT_CSV: ${{ github.event.inputs.csv_file_path }}
         OUTPUT_CSV: output/completed_data.csv
       run: |
+        mkdir -p output
         python process_csv.py
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
-        git add output/completed_data.csv
-        git commit -m 'Add processed CSV file'
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
