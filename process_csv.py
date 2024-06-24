@@ -39,7 +39,7 @@ def predict_missing_values(df, look_back):
 # Main function to process the CSV
 def main(input_csv, output_csv):
     # Read the CSV file
-    df = pd.read_csv(input_csv)
+    df = pd.read_csv(sample.csv)
 
     # Define look_back period
     look_back = 10
