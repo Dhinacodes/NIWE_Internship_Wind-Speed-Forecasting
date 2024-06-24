@@ -36,30 +36,30 @@ def predict_missing_values(df, look_back):
     
     return df
 
-# Main function to process the CSV
-def main():
-    input_csv = os.getenv('INPUT_CSV')
-    output_csv = os.getenv('OUTPUT_CSV')
+# Process all CSV files in input directory
+def process_csv_files(input_dir, output_dir):
+    for filename in os.listdir(input_dir):
+        if filename.endswith('.csv'):
+            input_csv = os.path.join(input_dir, filename)
+            df = pd.read_csv(input_csv)
 
-    print(f"INPUT_CSV: {input_csv}")
-    print(f"OUTPUT_CSV: {output_csv}")
+            # Define look_back period
+            look_back = 10
 
-    if not input_csv or not output_csv:
-        print("Environment variables INPUT_CSV and OUTPUT_CSV must be set.")
-        return
+            # Predict missing values
+            df = predict_missing_values(df, look_back)
 
-    # Read the CSV file
-    df = pd.read_csv(input_csv)
+            # Save output to output directory
+            output_csv = os.path.join(output_dir, 'completed_' + filename)
+            df.to_csv(output_csv, index=False)
 
-    # Define look_back period
-    look_back = 10
+            print(f'Processed: {input_csv} -> Output saved to: {output_csv}')
 
-    # Predict the missing 100m Avg[m/s] values
-    df = predict_missing_values(df, look_back)
+# Example usage
+if __name__ == '__main__':
+    input_dir = 'data/input'
+    output_dir = 'data/output'
+    os.makedirs(output_dir, exist_ok=True)
+    process_csv_files(input_dir, output_dir)
 
-    # Save the completed dataframe to CSV
-    df.to_csv(output_csv, index=False)
-
-if __name__ == "__main__":
-    main()
 
