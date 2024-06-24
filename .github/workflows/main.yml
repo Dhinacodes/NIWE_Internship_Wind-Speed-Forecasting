@@ -29,12 +29,13 @@ jobs:
       - name: Execute Python Script
         run: python process_data.py  # Ensure this path is correct
 
+      - name: List output directory
+        run: ls -la data/output
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@users.noreply.github.com'
-          git add data/output  # Add the output directory to track new files
-          git commit -m "Automated data processing"
+          git add data/output
+          git diff-index --quiet HEAD || git commit -m "Automated data processing"
           git push || echo "No changes to commit"
-
-
