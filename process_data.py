@@ -56,6 +56,7 @@ def process_csv_files(input_dir, output_dir):
             df.to_csv(output_csv, index=False)
 
             print(f"Processed {input_csv} -> Output saved to: {output_csv}")
+            print(f"Output file size: {os.path.getsize(output_csv)} bytes")
 
 # Example usage
 if __name__ == '__main__':
@@ -63,5 +64,6 @@ if __name__ == '__main__':
     output_dir = 'data/output'
     os.makedirs(output_dir, exist_ok=True)
     process_csv_files(input_dir, output_dir)
+    print(f"Files in output directory: {os.listdir(output_dir)}")
 
 
