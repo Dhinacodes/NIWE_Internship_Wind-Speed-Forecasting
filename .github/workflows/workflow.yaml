@@ -31,5 +31,15 @@ jobs:
         OUTPUT_CSV: output/completed_data.csv
       run: |
         mkdir -p output
-        python process_csv.py
+        python process_csv.py $INPUT_CSV
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add output/completed_data.csv
+        git commit -m 'Add processed CSV file'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
