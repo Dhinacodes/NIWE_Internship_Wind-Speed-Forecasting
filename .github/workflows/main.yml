@@ -33,7 +33,8 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@users.noreply.github.com'
-          git add .
+          git add data/output  # Add the output directory to track new files
           git commit -m "Automated data processing"
-          git push
+          git push || echo "No changes to commit"
+
 
