@@ -59,4 +59,3 @@ if __name__ == "__main__":
     output_csv = sys.argv[2]
     
     main(input_csv, output_csv)
-
