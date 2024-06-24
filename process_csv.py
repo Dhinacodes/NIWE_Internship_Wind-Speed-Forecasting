@@ -1,5 +1,4 @@
 import sys
-import os
 import pandas as pd
 import numpy as np
 from keras.models import load_model
@@ -60,3 +59,4 @@ if __name__ == "__main__":
     output_csv = sys.argv[2]
     
     main(input_csv, output_csv)
+
