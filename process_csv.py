@@ -1,3 +1,4 @@
+import sys
 import os
 import pandas as pd
 import numpy as np
@@ -51,7 +52,11 @@ def main(input_csv, output_csv):
     df.to_csv(output_csv, index=False)
 
 if __name__ == "__main__":
-    # Define input and output CSV file names
-    input_csv = os.getenv('INPUT_CSV', 'sample.csv')
-    output_csv = os.getenv('OUTPUT_CSV', 'completed_data.csv')
+    if len(sys.argv) != 3:
+        print("Usage: python process_csv.py <input_csv_path> <output_csv_path>")
+        sys.exit(1)
+    
+    input_csv = sys.argv[1]
+    output_csv = sys.argv[2]
+    
     main(input_csv, output_csv)
