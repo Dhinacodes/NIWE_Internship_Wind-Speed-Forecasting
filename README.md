@@ -1,5 +1,5 @@
 NIWE Internship Project
-Wind Speed Forecasting using CNN Model
+Wind Speed Forecasting using CNN Model:Building,Deploying and Automation
 
 This project focuses on building a wind speed forecasting system using a Convolutional Neural Network (CNN) model. It utilizes historical meteorological data from the Jafrabad coast (December 2018 - November 2019) to predict wind speeds accurately.
 
